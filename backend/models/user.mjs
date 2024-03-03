@@ -1,18 +1,49 @@
 import {getDB, initDB} from "./db.mjs";
+import argon2 from "argon2";
+import sanitize from "mongo-sanitize"; 
+
+const argon_config = {
+    type: argon2.argon2id,
+    memoryCost: 15360
+};
 
 
 
-export async function createUser(phoneNum){
+export async function createUser(phoneNum, password){
     try{
-        console.log("Creating user with phone number: ", phoneNum);
         const db = await getDB();
-        let user = await db.collection("users").findOne({phonenumber: phoneNum});
-        if(user){
-            return "User already exists";
+        const col = db.collection("users");
+        
+        const userData = {
+            phonenumber: sanitize(phoneNum),
+            password: await argon2.hash(password, argon_config)
         }
-        user = {phonenumber: phoneNum};
-        const result = await db.collection("users").insertOne(user);
-        return result;
+        const result = await col.insertOne(userData);
+        return {
+            ...userData, 
+            _id: result.insertedId
+        }
+        
+        return {}
+    }
+    catch(e){
+        console.error(e);
+    }
+}
+
+export async function validateUser(phoneNum, password){
+    try{
+        const db = await getDB();
+        const col = db.collection("users");
+        const user = await col.findOne({
+            phonenumber: sanitize(phoneNum)
+        });
+
+        if (user){
+            const valid = await argon2.verify(user.password, password);
+            return valid;
+        }
+        return false;
     }
     catch(e){
         console.error(e);
@@ -23,7 +54,16 @@ export async function getUser(phoneNum){
     try{
         console.log("Getting user with phone number: ", phoneNum);
         const db = await getDB();
-        const user = await db.collection("users").findOne({phonenumber: phoneNum});
+        const coll = db.collection("users");
+        const user = coll.findOne({
+            phonenumber: sanitize(phoneNum)
+        }, 
+        {
+            projection: {
+                password: 0
+            }
+        }
+        );
         return user;
     }
     catch(e){

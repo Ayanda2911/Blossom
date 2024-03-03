@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, Button } from 'react-native';
 import React, { useState } from 'react';
 import { Audio } from 'expo-av';
-import OpenAI from 'openai';
 
 
 
@@ -9,7 +8,6 @@ export default function ActiveRecording() {
   
     const [recording, setRecording] = useState();
     const [permissionResponse, requestPermission] = Audio.usePermissions();
-    const openai = new OpenAI('sk-1234567890abcdef1234567890abcdef');
   
     async function startRecording() {
       try {
