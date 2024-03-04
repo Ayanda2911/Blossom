@@ -12,7 +12,7 @@ import apiRouter from "./routes/api.mjs";
 
 dotenv.config();
 
-const app = express();
+const app = express(); //Creation of app
 
 export let server; 
 
@@ -49,7 +49,7 @@ initDB().then(()=>{
     app.use('/api',  apiRouter)
     app.use(express.static('public'));
     
-    const port = 3000;
+    const port = 6000;
 
     server = app.listen(port); 
 

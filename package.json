@@ -4,10 +4,9 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "dev": "cross-env nodemon ./backend/app.mjs"
+    "dev": "cross-env nodemon ./backend/server.mjs"
   },
   "dependencies": {
     "@expo-google-fonts/nunito": "^0.2.3",
