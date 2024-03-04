@@ -102,5 +102,17 @@ router.post("/register", async (req, res) => {
         "username": user.phoneNum
     });
 });
+ // check if user is signed in
+router.get("/isSignedIn", (req, res) => {
+    if (isSignedIn(req)) {
+        res.json({
+            "message": "User is signed in",
+            "username": req.session.username
+        });
+    } else {
+        res.json({
+            "message": "User is not signed in"
+        });
+    }
+    }); 
 export default router;
-

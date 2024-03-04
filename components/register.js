@@ -3,7 +3,8 @@ import { CheckBox } from 'react-native-btr';
 import { View, TextInput, Button, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {Ionicons } from 'react-native-vector-icons';
-import EmergencyContacts from './EmergencyContacts';
+
+
 
 
 export default function Registration({ navigation }) {
@@ -45,24 +46,41 @@ export default function Registration({ navigation }) {
     return (
         <KeyboardAwareScrollView contentContainerStyle={styles.container}>
             <View style={styles.arrowContainer}>
-                <TouchableOpacity onPress={() => navigation.navigate('EmergencyContacts')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Contacts')}>
                     <Ionicons name='arrow-forward-outline' style={styles.arrowImage} 
                         size={30}/>
                 </TouchableOpacity>
             </View>
-            
-            <TextInput
-                style={styles.input}
-                placeholder="Phone Number"
-                value={phoneNum}
-                onChangeText={setPhoneNum}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-            />
+            <View style={styles.textContainer}>
+                <View>
+                    <Text>Phone Number</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Phone Number"
+                    value={phoneNum}
+                    onChangeText={setPhoneNum}
+                />
+                </View>
+                <View>
+                    <Text>Username</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Preferred Username"
+                        value={password}
+                        onChangeText={setPassword}
+                    />
+                </View>
+                <View >
+                    <Text>Password</Text>
+                    <TextInput
+                        title="Password"
+                        style={styles.input}
+                        placeholder="Re-enter phone number"
+                        value={password}
+                        onChangeText={setPassword}
+                    />
+                </View>
+            </View>
             <CheckBox
                 title="Remember me"
                 style={styles.checkbox}
@@ -84,15 +102,23 @@ const styles = StyleSheet.create({
         flex: "1", 
         backgroundColor: '#fff',
         alignItems: 'center',
+        fontFamily: 'Arial',
 
     }, 
-    input: {
+    textContainer: {
         width: '80%',
+        fontSize: 30,
+
+    },
+    input: {
+        alignSelf: 'flex-start',
         height: 40,
         borderColor: 'gray',
         borderWidth: 1,
-        marginBottom: 10,
+        marginBottom: 40,
+        marginTop: 10,
         paddingHorizontal: 10,
+        width: '100%',
     },
     checkbox: {
         alignSelf: 'flex-start',

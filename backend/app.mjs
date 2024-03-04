@@ -21,7 +21,8 @@ initDB().then(()=>{
     const store = mongoStore.create({
         client: getClient(),
         collectionName: "sessions",
-        dbName: "BuildathonAPP" 
+        dbName: "BuildathonAPP" ,
+        touchAfter: 24 * 3600
 
     });
     store.on("error", function(e){
