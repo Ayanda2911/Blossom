@@ -4,6 +4,7 @@ import express from "express";
 import dotenv from "dotenv";
 import session from "express-session"; 
 import mongoStore from "connect-mongo";
+import cors from "cors";
 
 
 import { initDB, getClient } from "./models/db.mjs";; 
@@ -13,6 +14,7 @@ import apiRouter from "./routes/api.mjs";
 dotenv.config();
 
 const app = express(); //Creation of app
+
 
 export let server; 
 
@@ -49,7 +51,7 @@ initDB().then(()=>{
     app.use('/api',  apiRouter)
     app.use(express.static('public'));
     
-    const port = 6000;
+    const port = 3000;
 
     server = app.listen(port); 
 

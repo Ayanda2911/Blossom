@@ -11,28 +11,44 @@ import HomePage from './components/Homepage';
 import LandingPage from './components/LandingPage';
 import Login from './components/Login';
 
+import { apiUrl } from './apiConfig';
+
 const Stack = createStackNavigator(); 
 
+/**
+ * The main component of the application.
+ * 
+ * @returns {JSX.Element} The rendered application component.
+ */
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({}); // [user, setUser
+
+  /**
+   * Checks if the user is logged in by making a request to the backend.
+   * If the user is signed in, it sets the isLoggedIn state to true.
+   * @returns {Promise<void>} A promise that resolves when the check is complete.
+   */
   const checkLogin = async () => {
     try {
-      // my api address is 192.168.112.1
-      // change it to yours 
-      // you can find it by running ipconfig in your terminal and loking for ipv4
-      const req = await fetch('http://192.168.112.1:3000/api/isSignedIn', {
+      // this is how we make requests to the backend and it passes back information related to the user
+      const response = await fetch(`${apiUrl}/isSignedIn`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        timeout: 10000,
       });
-
-      const data = await req.json();
-      console.log(data);
-      if (data.message === 'User is signed in') {
-        setIsLoggedIn(true);
+      
+      if(!response.ok){
+        throw new Error('Network response was not ok');
+      }else{
+          const data = await response.json();
+          console.log(data);
+          if (data.message === 'User is signed in') {
+            setIsLoggedIn(true);
+          }
       }
+      
     } catch (error) {
       console.error('Error:', error);
     }

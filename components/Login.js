@@ -8,7 +8,7 @@ export default function Login( {navigation} ){
     const handleLogin = async () => {
             try {
                 console.log('username:', username, 'password:', password)
-                const response = await fetch('http://192.168.112.1:3000/api/login', {
+                const response = await fetch('https://tough-rooms-enter.loca.lt/api/login', {
                     method: 'POST',
                     headers: {
                     'Content-Type': 'application/json',
