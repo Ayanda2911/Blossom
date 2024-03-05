@@ -9,14 +9,15 @@ const argon_config = {
 
 
 
-export async function createUser(phoneNum, password){
+export async function createUser(phoneNum, username){
     try{
         const db = await getDB();
         const col = db.collection("users");
         
         const userData = {
             phonenumber: sanitize(phoneNum),
-            password: await argon2.hash(password, argon_config)
+            password: await argon2.hash(phoneNum, argon_config), 
+            username: sanitize(username)
         }
         const result = await col.insertOne(userData);
         return {
@@ -24,7 +25,6 @@ export async function createUser(phoneNum, password){
             _id: result.insertedId
         }
         
-        return {}
     }
     catch(e){
         console.error(e);

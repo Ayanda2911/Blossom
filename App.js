@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { StyleSheet,  } from 'react-native';
+import { createStackNavigator , rootStack} from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 // List of the different screens
@@ -10,6 +10,8 @@ import Signup from './components/register';
 import HomePage from './components/Homepage';
 import LandingPage from './components/LandingPage';
 import Login from './components/Login';
+import AddEmergencyContacts from './components/addEmergencyContacts';
+import EmergencyContacts from './components/EmergencyContacts';
 
 import { apiUrl } from './apiConfig';
 
@@ -29,6 +31,7 @@ export default function App() {
    * If the user is signed in, it sets the isLoggedIn state to true.
    * @returns {Promise<void>} A promise that resolves when the check is complete.
    */
+  
   const checkLogin = async () => {
     try {
       // this is how we make requests to the backend and it passes back information related to the user
@@ -43,7 +46,6 @@ export default function App() {
         throw new Error('Network response was not ok');
       }else{
           const data = await response.json();
-          console.log(data);
           if (data.message === 'User is signed in') {
             setIsLoggedIn(true);
           }
@@ -55,7 +57,18 @@ export default function App() {
   };
 
   const handleLogout = () => {
-    //setIsLoggedIn(false);
+      fetch(`${apiUrl}/logout`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then((response) => {
+        setIsLoggedIn(false); // Always set isLoggedIn to false on logout
+    })
+    .catch((error) => {
+        console.error('Logout Error:', error); // Log any errors to the console
+    });
   };
 
   useEffect(() => {
@@ -66,21 +79,17 @@ export default function App() {
   return (
     //Stack.Navigator is a container for the different screens\
     //Stack.Screen represents a screen in the app
+
     <NavigationContainer>
       <Stack.Navigator> 
-        {isLoggedIn ? (
-          <>
-            <Stack.Screen name="Home" component={HomePage} />
-            <Stack.Screen name="ActiveRecording" component={ActiveRecording} />
-            {/* Add more screens as needed */}
-          </>
-        ) : (
-          <>
-            <Stack.Screen name="LandingPage" component={LandingPage} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Signup" component={Signup} />
-          </>
-        )}
+        <Stack.Screen name="LandingPage" component={LandingPage} />
+        <Stack.Screen name="Home" component={HomePage} />
+        <Stack.Screen name="ActiveRecording" component={ActiveRecording} />
+        <Stack.Screen name="EmergencyContacts" component={EmergencyContacts} />
+        <Stack.Screen name="AddEmergency" component={AddEmergencyContacts} />
+        {/* Add more screens as needed */}
+        {/* <Stack.Screen name="Login" component={Login} />*/}
+        <Stack.Screen name="Signup" component={Signup}  />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -3,11 +3,11 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 export default function Login( {navigation} ){
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [phoneNum, setPhonenumber] = useState('');
 
     const handleLogin = async () => {
             try {
-                console.log('username:', username, 'password:', password)
+                console.log('username:', username, 'phoneNum:', phoneNum)
                 const response = await fetch('https://tough-rooms-enter.loca.lt/api/login', {
                     method: 'POST',
                     headers: {
@@ -15,7 +15,7 @@ export default function Login( {navigation} ){
                     },
                     
                     // the content type is{
-                    body: JSON.stringify({ phoneNum: username, password : password }),
+                    body: JSON.stringify({ phoneNum, username}),
                 });
 
                 if (!response.ok) {
