@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
+// List of the different screens
 import ActiveRecording from './components/recording';
 import Signup from './components/register';
 import HomePage from './components/Homepage';
@@ -47,8 +48,10 @@ export default function App() {
 
   
   return (
+    //Stack.Navigator is a container for the different screens\
+    //Stack.Screen represents a screen in the app
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator> 
         {isLoggedIn ? (
           <>
             <Stack.Screen name="Home" component={HomePage} />
