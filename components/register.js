@@ -3,10 +3,17 @@ import { CheckBox } from 'react-native-btr';
 import { View, TextInput, Button, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {Ionicons } from 'react-native-vector-icons';
+import { apiUrl } from '../apiConfig';
 
 
 
 
+/**
+ * Renders a registration form and handles the registration process.
+ *
+ * @param {object} navigation - The navigation object used for navigating between screens.
+ * @returns {JSX.Element} The rendered registration form.
+ */
 export default function Registration({ navigation }) {
     const [phoneNum, setPhoneNum] = useState('');
     const [password, setPassword] = useState('');
@@ -14,13 +21,14 @@ export default function Registration({ navigation }) {
     const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState('');
 
+
     const handleRegister = async () => {
-        const response = await fetch(`http://localhost:3000/user/${phoneNum}`);
+        const response = await fetch(`${apiUrl}}/user/${phoneNum}`);
         const user = await response.json();
         if (user) {
             setError('User already exists');
         } else {
-            const response = await fetch('http://localhost:3000/user', {
+            const response = await fetch(`${apiUrl}/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,12 +62,12 @@ export default function Registration({ navigation }) {
             <View style={styles.textContainer}>
                 <View>
                     <Text>Phone Number</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Phone Number"
-                    value={phoneNum}
-                    onChangeText={setPhoneNum}
-                />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Phone Number"
+                        value={phoneNum}
+                        onChangeText={setPhoneNum}
+                    />
                 </View>
                 <View>
                     <Text>Username</Text>
