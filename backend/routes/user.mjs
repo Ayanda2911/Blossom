@@ -5,11 +5,20 @@ import { getUser } from  "../models/user.mjs";
 const router = express.Router();
 
 router.get("/:phoneNum", async (req, res) => {
-    const phoneNum = req.params.phoneNum;
-    const user = await getUser(phoneNum);
-    res.json(user);
-    return ; 
-}); 
+    try {
+        const phoneNum = req.params.phoneNum;
+        const user = await getUser(phoneNum);
+        
+        if (user === null) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        
+        return res.status(200).json(user);
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+});
 
 // maybe change password for phoneNum 
 // change emergency contact for phone num 

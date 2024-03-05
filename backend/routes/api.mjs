@@ -47,61 +47,60 @@ router.post("/login", async (req, res) => {
 router.get("/logout", (req, res) => {
 
     if (!isSignedIn(req)) {
-        res.status(400);
-        res.json({
-            "message": "must be signed in order to logout "
+        return res.status(403).json({
+            message: "You must be signed in to log out"
         });
-        return;
     }
-
-    req.session.destroy();
-    res.json({
-        "message": "Goodbye!"
-    });
+    
+    try {
+        req.session.destroy((error) => {
+            if (error) {
+                console.error("Error destroying session:", error);
+                return res.status(500).json({
+                    message: "Failed to log out"
+                });
+            }
+            return res.json({
+                message: "Goodbye!"
+            });
+        });
+    } catch (error) {
+        console.error("Error destroying session:", error);
+        return res.status(500).json({
+            message: "Failed to log out"
+        });
+    }
 });
 
 //register handler
 router.post("/register", async (req, res) => {
-    if (isSignedIn(req)) {
-        res.status(400);
-        res.json({
-            "message": "Already signed in"
-        });
-        return;
-    }
-    // check that the request has a username and password
-    const keys = ["phoneNum", "password"]
-    if (!keys.every((e) => req.body.hasOwnProperty(e))) {
-        // Error this is a malformed registration request
-        res.status(400);
-        res.json({
-            "message": "Invalid Username or password"
-        })
-        return;
-    }
-    // CHECK THAT PHONENUMBER DOES NOT EXIST
-    const exists  = await getUser(req.body.phoneNum);
-    if (exists) {
-        res.status(400);
-        res.json({
-            "message": "User with this phone number already exists ",
-            "Phone Number": req.body.phoneNum
-        });
-        return;
-    }
-    // create the user
-    const user = await createUser(req.body.phoneNum, req.body.password);
+    try {
+        if (isSignedIn(req)) {
+            return res.status(400).json({ message: "Already signed in" });
+        }
 
-    // store username and _id as part of session
-    req.session.username = user.phoneNum;
-    req.session._id = user._id;
+        const requiredFields = ["phoneNum", "username"];
+        if (!requiredFields.every(field => req.body.hasOwnProperty(field))) {
+            return res.status(400).json({ message: "Invalid phone number or username" });
+        }
 
-    // send back a confirmation message
-    res.json({
-        "message": "Registration successful",
-        "username": user.phoneNum
-    });
+        const existingUser = await getUser(req.body.phoneNum);
+        if (existingUser) {
+            return res.status(400).json({ message: "User with this phone number already exists", phoneNum: req.body.phoneNum });
+        }
+
+        const newUser = await createUser(req.body.phoneNum, req.body.username);
+
+        req.session.username = newUser.phoneNum;
+        req.session._id = newUser._id;
+
+        return res.status(200).json({ message: "Registration successful", username: newUser.phoneNum });
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
 });
+
  // check if user is signed in
 router.get("/isSignedIn", (req, res) => {
     if (isSignedIn(req)) {

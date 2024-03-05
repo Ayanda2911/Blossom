@@ -1,1 +1,1 @@
-export const  apiUrl = 'https://upset-jokes-slide.loca.lt/api';
+export const  apiUrl = 'https://good-geese-talk.loca.lt/api';

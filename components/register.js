@@ -16,76 +16,63 @@ import { apiUrl } from '../apiConfig';
  */
 export default function Registration({ navigation }) {
     const [phoneNum, setPhoneNum] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setusername] = useState('');
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState('');
 
-
     const handleRegister = async () => {
-        const response = await fetch(`${apiUrl}}/user/${phoneNum}`);
-        const user = await response.json();
-        if (user) {
-            setError('User already exists');
-        } else {
-            const response = await fetch(`${apiUrl}/register`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    phoneNum,
-                    password,
-                }),
-            });
-            if (response.status === 201) {
-                setError('');
-                setIsSignedIn(true);
-                if (rememberMe) {
-                    localStorage.setItem('phoneNum', phoneNum);
-                    localStorage.setItem('password', password);
+        console.log('phoneNum:', phoneNum, 'username:', username);
+        try {
+                const registerResponse = await fetch(`${apiUrl}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                         phoneNum,
+                         username,
+                    }),
+                });
+                if (registerResponse.ok) {
+                    setError('');
+                    setIsSignedIn(true);
+                    if (rememberMe) {
+                        localStorage.setItem('phoneNum', phoneNum);
+                        localStorage.setItem('username', username);
+                    }
+                    navigation.navigate("AddEmergency");
+                } else {
+                    throw new Error('Failed to register user');
                 }
-            } else {
-                setError('Failed to register');
-            }
+        } catch (error) {
+            console.error('Error:', error);
+            setError('An error occurred');
         }
-    };
+};
 
     return (
         <KeyboardAwareScrollView contentContainerStyle={styles.container}>
             <View style={styles.arrowContainer}>
-                <TouchableOpacity onPress={() => navigation.navigate('Contacts')}>
-                    <Ionicons name='arrow-forward-outline' style={styles.arrowImage} 
-                        size={30}/>
-                </TouchableOpacity>
+                <Text> Set up 1 of 3</Text>
             </View>
             <View style={styles.textContainer}>
                 <View>
                     <Text>Phone Number</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder="Phone Number"
+                        placeholder="Enter your phone number without any dashes or spaces"
                         value={phoneNum}
                         onChangeText={setPhoneNum}
                     />
                 </View>
                 <View>
-                    <Text>Username</Text>
+                    <Text>User Name</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder="Preferred Username"
-                        value={password}
-                        onChangeText={setPassword}
-                    />
-                </View>
-                <View >
-                    <Text>Password</Text>
-                    <TextInput
-                        title="Password"
-                        style={styles.input}
-                        placeholder="Re-enter phone number"
-                        value={password}
-                        onChangeText={setPassword}
+                        placeholder="Enter a username "
+                        value={username}
+                        onChangeText={setusername}
                     />
                 </View>
             </View>
