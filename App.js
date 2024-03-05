@@ -20,9 +20,11 @@ const Stack = createStackNavigator();
  * 
  * @returns {JSX.Element} The rendered application component.
  */
+
+
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({}); // [user, setUser
+  const [isLoggedIn, setIsLoggedIn] = useState(false); //false is only applied to isLoggedIn
+  const [user, setUser] = useState({}); // User is an empty object
 
   /**
    * Checks if the user is logged in by making a request to the backend.
@@ -32,6 +34,7 @@ export default function App() {
   const checkLogin = async () => {
     try {
       // this is how we make requests to the backend and it passes back information related to the user
+      //await pauses the execution of the function until the promise is resolved
       const response = await fetch(`${apiUrl}/isSignedIn`, {
         method: 'GET',
         headers: {
@@ -48,7 +51,6 @@ export default function App() {
             setIsLoggedIn(true);
           }
       }
-      
     } catch (error) {
       console.error('Error:', error);
     }
