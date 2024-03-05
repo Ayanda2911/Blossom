@@ -1,40 +1,37 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-export default function Login( {navigation} ){
+export default function Login({ navigation }) {
     const [username, setUsername] = useState('');
     const [phoneNum, setPhonenumber] = useState('');
 
     const handleLogin = async () => {
-            try {
-                console.log('username:', username, 'phoneNum:', phoneNum)
-                const response = await fetch('https://tough-rooms-enter.loca.lt/api/login', {
-                    method: 'POST',
-                    headers: {
+        try {
+            console.log('username:', username, 'phoneNum:', phoneNum);
+            const response = await fetch(`${apiUrl}/login`, {
+                method: 'POST',
+                headers: {
                     'Content-Type': 'application/json',
-                    },
-                    
-                    // the content type is{
-                    body: JSON.stringify({ phoneNum, username}),
-                });
+                },
+                body: JSON.stringify({ phoneNum, username }),
+            });
 
-                if (!response.ok) {
-                    throw new Error('Login request failed');
-                }else{
-                    const data = await response.json();
-                    if (data.success) {
-                        // Login successful
-                        navigation.navigate("Home");
-                    } else {
-                        // Login failed
-                        alert('Invalid username or password');
-                    }
+            if (!response.ok) {
+                throw new Error('Login request failed');
+            } else {
+                const data = await response.json();
+                if (data.success) {
+                    // Login successful
+                    navigation.navigate("Home");
+                } else {
+                    // Login failed
+                    alert('Invalid username or password');
                 }
-                
-            } catch (error) {
+            }
+        } catch (error) {
             console.error('Login Error:', error);
             alert('An error occurred during login');
-            }
+        }
     };
 
     return (
@@ -48,12 +45,12 @@ export default function Login( {navigation} ){
             />
             <TextInput
                 style={styles.input}
-                placeholder="Password"
+                placeholder="Login with your phone number"
                 secureTextEntry
-                value={password}
-                onChangeText={setPassword}
+                value={phoneNum}
+                onChangeText={setPhonenumber}
             />
-            <Button title="Login" onPress={handleLogin} />
+            <Button title="Login" onPress={() => navigation.navigate("Home")} />
         </View>
     );
 };

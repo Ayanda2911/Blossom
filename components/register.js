@@ -84,7 +84,11 @@ export default function Registration({ navigation }) {
             />
             <Button
                 title="Register"
-                onPress={handleRegister}
+                // whenevr you use a function in a button, you need to use an arrow function
+                // otherwise the function will be called immediately
+                // and the button will not work as expected
+                //ie use () => handleRegister() instead of handleRegister()
+                onPress={() =>{navigation.navigate("AddEmergency")}}
             />
             {error ? <Text style={styles.error}>{error}</Text> : null}
         </KeyboardAwareScrollView>

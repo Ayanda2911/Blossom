@@ -7,13 +7,13 @@ const backgroundImage = require("../assets/landingBackground.png");
 //Loads the custom font
 const fetchFonts = () => {
     return Font.loadAsync({
-        'Nunito-regular': require('../assets/Nunito/Nunito-Regular.ttf'),
+        'Nunito-regular': require('../assets/fonts/Nunito/Nunito-Regular.ttf'),
     });
 };
 
 const fetchFonts2 = () => {
     return Font.loadAsync({
-        'Nunito-regular': require('../assets/Nunito/Nunito-LightItalic.ttf'),
+        'Nunito-regular': require('../assets/fonts/Nunito/Nunito-LightItalic.ttf'),
     });
 };
 

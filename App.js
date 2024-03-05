@@ -84,13 +84,15 @@ export default function App() {
 
     <NavigationContainer>
       <Stack.Navigator> 
-        <Stack.Screen name="LandingPage" component={LandingPage} />
+        {/* Hide the title at the top */}
+        <Stack.Screen name="LandingPage" component={LandingPage} 
+          options={{headerShown : false}}/>
         <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="ActiveRecording" component={ActiveRecording} />
+        <Stack.Screen name="Active Recording" component={ActiveRecording} />
         <Stack.Screen name="EmergencyContacts" component={EmergencyContacts} />
         <Stack.Screen name="AddEmergency" component={AddEmergencyContacts} />
         {/* Add more screens as needed */}
-        {/* <Stack.Screen name="Login" component={Login} />*/}
+         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup}  />
       </Stack.Navigator>
     </NavigationContainer>

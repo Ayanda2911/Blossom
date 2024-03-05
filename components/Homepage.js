@@ -11,7 +11,7 @@ export default function Homepage({ navigation }) {
             />
             <Button
                 title="Emergency Contacts"
-                onPress={() => navigation.navigate("Contacts")}
+                onPress={() => navigation.navigate("EmergencyContacts")}
             />
         </View>
     );

@@ -1,3 +1,3 @@
 module.exports = {
-    assets: ['./assets/Nunito/Nunito-Regular.ttf'],
+    assets: ['./assets/fonts/Nunito/Nunito-Regular.ttf'],
 };
