@@ -4,18 +4,7 @@ import * as Font from 'expo-font';
 
 const backgroundImage = require("../assets/landingBackground.png");
 
-//Loads the custom font
-const fetchFonts = () => {
-    return Font.loadAsync({
-        'Nunito-regular': require('../assets/fonts/Nunito/Nunito-Regular.ttf'),
-    });
-};
 
-const fetchFonts2 = () => {
-    return Font.loadAsync({
-        'Nunito-regular': require('../assets/fonts/Nunito/Nunito-LightItalic.ttf'),
-    });
-};
 
 //Landing page component
 export default function LandingPage({navigation}) {

@@ -101,14 +101,15 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         paddingVertical: 20, 
-        paddingHorizontal: 20, 
+        paddingHorizontal: 20,
+        fontFamily: 'Nunito-regular', 
     },
     title: {
         fontSize: 24,
         paddingVertical : 40, 
-        fontFamily: 'Nunito_400Regular',
+        fontFamily: 'Nunito-regular',
         color: '#FB6813',
-
+        fontWeight: 'bold'
     },
     input: {
         width: '90%',
@@ -118,6 +119,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         paddingHorizontal: 8,
         borderRadius: 15,
+        fontFamily: 'Nunito-regular',
     },
     loginButton: {
         backgroundColor: '#FB6813',
@@ -126,12 +128,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 15,
         paddingVertical : 10, 
+        fontFamily: 'Nunito-regular',
+        fontWeight: 'bold',
     },
     stayLoggedIn: {
         flexDirection: 'row',
         width: '95%',
         marginBottom: 16,
         fontSize: 14,
+        fontFamily: 'Nunito-regular',
     },
     checkboxContainer: {
         flexDirection: 'row', 
@@ -141,6 +146,7 @@ const styles = StyleSheet.create({
     boxAndText: {
         flexDirection: 'row',
         alignItems: 'center',
+        fontFamily: 'Nunito-regular',
     },
     checkbox: {
         alignSelf: 'center',

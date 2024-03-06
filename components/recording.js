@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { Audio } from 'expo-av';
 
-
-
 export default function ActiveRecording() {
+
+  // on load you want to set the recording to true and start recording 
+  useEffect(() => {
+    startRecording();
+  }, []);
   
     const [recording, setRecording] = useState();
     const [permissionResponse, requestPermission] = Audio.usePermissions();
@@ -47,10 +50,24 @@ export default function ActiveRecording() {
   
     return (
       <View style={styles.container}>
-        <Button
-          title={recording ? 'Stop Recording' : 'Start Recording'}
-          onPress={recording ? stopRecording : startRecording}
-        />
+        <View>
+          <Text style={styles.loadText}>Loading flower options</Text>
+        </View>
+        <View style={styles.recordingInProgress}>
+          <ImageBackground
+            source={require('../assets/orange_flower_animation.gif')}
+            style={{ width: 200, height: 200 }}
+          >
+          </ImageBackground>
+        </View>
+        <View style={styles.stopButton}>
+          <TouchableOpacity 
+              onPress={() =>stopRecording()}
+              style={{backgroundColor: '#FF5733', padding: 10, borderRadius: 10,}}
+              >
+            <Text style={{ padding : 30, fontSize: 18, fontWeight: 'bold'}}>Cancel Loading</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -59,8 +76,13 @@ export default function ActiveRecording() {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    loadText: {
+      fontSize: 24,
+      color: '#FF5733',
+      textAlign: 'center',
+      padding: 30
     },
   });

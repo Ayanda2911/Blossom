@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet,  } from 'react-native';
 import { createStackNavigator , rootStack} from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import * as Font from 'expo-font';
 
 // List of the different screens
 import ActiveRecording from './components/recording';
@@ -18,7 +19,14 @@ import { apiUrl } from './apiConfig';
 
 const Stack = createStackNavigator(); 
 
+//Loads the custom font here so we can use it everywhere in the app
+const fetchFonts = () => {
+  return Font.loadAsync({
+      'Nunito-regular': require('./assets/fonts/Nunito/Nunito-Regular.ttf'),
+      'Nunito-LightItalic': require('./assets/fonts/Nunito/Nunito-LightItalic.ttf'),
 
+  });
+};
 /**
  * The main component of the application.
  * 
@@ -85,12 +93,22 @@ export default function App() {
     //Stack.Screen represents a screen in the app
 
     <NavigationContainer>
-      <Stack.Navigator> 
+      <Stack.Navigator style={styles.container}> 
         {/* Hide the title at the top */}
         <Stack.Screen name="LandingPage" component={LandingPage} 
           options={{headerShown : false}}/>
         <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="Active Recording" component={ActiveRecording} />
+        <Stack.Screen name="Active Recording" component={ActiveRecording} 
+          options={{
+            headerTitle: props => <LogoTitle {...props} />,
+            headerStyle : { 
+              backgroundColor : 'transparent', 
+              height : 100,  
+            }, 
+            headerBackTitleVisible : false,
+            headerBackVisible : true, 
+          }}
+        />
         <Stack.Screen name="EmergencyContacts" component={EmergencyContacts} />
         <Stack.Screen name="AddEmergency" component={AddEmergencyContacts} />
          <Stack.Screen name="Login" component={Login}
@@ -112,6 +130,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'center'
   }
 });
