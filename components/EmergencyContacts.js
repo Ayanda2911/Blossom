@@ -14,6 +14,8 @@ export default function EmergencyContacts({ navigation }) {
     
     const selectContacts = emergencyContacts.length;
 
+
+
     const handleDone = () => {
         navigation.navigate('TutorialPage');
         // Save emergency contacts to local backend 
@@ -85,6 +87,9 @@ export default function EmergencyContacts({ navigation }) {
         return debounce(setSearch, 30);
     }, []);
 
+
+
+
     return (
         <View style={styles.container}>
             <SearchBar 
@@ -101,8 +106,12 @@ export default function EmergencyContacts({ navigation }) {
                 {renderContacts()}
             </ScrollView>
         </View>
-    );
-}
+    );//end of return
+}//end of EmergencyContacts
+
+
+
+
 
 const styles = StyleSheet.create({
     container: {
