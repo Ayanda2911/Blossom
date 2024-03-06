@@ -9,7 +9,7 @@ import * as Font from 'expo-font';
 import ActiveRecording from './components/recording';
 import Signup from './components/register';
 import HomePage from './components/Homepage';
-import LandingPage from './components/landingPage';
+import LandingPage from './components/LandingPage';
 import Login from './components/Login';
 import AddEmergencyContacts from './components/addEmergencyContacts';
 import EmergencyContacts from './components/EmergencyContacts';
