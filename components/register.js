@@ -55,8 +55,8 @@ export default function Registration({ navigation }) {
         <View style={styles.container}>
         
             <Text style={styles.title}>Welcome to Blossom</Text>
-            <Text style={styles.subtitle}>Complete the setup process by providing the information
-                requested below. Thank you for joining us on this journey.</Text>
+            <Text style={styles.subtitle}>Please enter your phone number below,this will
+            act as your login id. Thank you for joining us on this journey.</Text>
 
             <View style={styles.countContainer}>
                 <Text style={styles.count}> Set up 1 of 2</Text>
@@ -100,10 +100,10 @@ export default function Registration({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center',
+        justifyContent: 'flex-start', //aligns its content at the top of the container
+        alignItems: 'center', //horizontally center the content within the container
         flex: "1", 
         backgroundColor: '#fff',
-        alignItems: 'center',
         fontFamily: 'Arial',
         paddingVertical: 20, 
         paddingHorizontal: 20,

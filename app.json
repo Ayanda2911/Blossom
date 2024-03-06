@@ -3,6 +3,9 @@
     "name": "VERA",
     "slug": "VERA",
     "version": "1.0.0",
+    "platforms": [
+      "ios"
+    ],
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {
@@ -20,4 +23,6 @@
       "expo-font"
     ]
   }
+
+
 }
