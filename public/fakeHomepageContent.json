@@ -1,0 +1,29 @@
+{
+    "flowers": [
+        {
+            "title": "Lisianthus",
+            "imgSource": "flower1.jpg",
+            "info": "Lisianthus is a delicate flower with ruffled petals and comes in various colors, symbolizing appreciation and gratitude."
+        },
+        {
+            "title": "Protea",
+            "imgSource": "flower2.jpg",
+            "info": "Protea is a unique flower native to South Africa, known for its striking appearance and representing courage and transformation."
+        },
+        {
+            "title": "Anemone",
+            "imgSource": "flower3.jpg",
+            "info": "Anemone is a dainty flower with vibrant petals and a dark center, symbolizing anticipation and protection against evil."
+        },
+        {
+            "title": "Bleeding Heart",
+            "imgSource": "flower4.jpg",
+            "info": "Bleeding Heart is a heart-shaped flower with drooping petals, representing deep emotions and unrequited love."
+        },
+        {
+            "title": "Bird of Paradise",
+            "imgSource": "flower5.jpg",
+            "info": "Bird of Paradise is an exotic flower with vibrant colors and unique shape, symbolizing joy, freedom, and paradise."
+        }
+    ]
+}

@@ -14,6 +14,7 @@ import Login from './components/Login';
 import AddEmergencyContacts from './components/addEmergencyContacts';
 import EmergencyContacts from './components/EmergencyContacts';
 import LogoTitle from './components/logoTitle';
+import FakeHomePage from './components/FakeHomePage';
 
 import { apiUrl } from './apiConfig';
 
@@ -121,6 +122,7 @@ export default function App() {
             headerBackVisible : true, 
           }} />
         <Stack.Screen name="Signup" component={Signup}  />
+        <Stack.Screen name="FakeHomePage" component={FakeHomePage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

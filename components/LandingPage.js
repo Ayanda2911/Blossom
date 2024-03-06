@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, Button, StyleSheet, ImageBackground } from "react-native";
-import * as Font from 'expo-font';
 
 const backgroundImage = require("../assets/landingBackground.png");
-
-
 
 //Landing page component
 export default function LandingPage({navigation}) {
