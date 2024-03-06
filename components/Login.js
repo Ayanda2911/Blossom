@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { CheckBox } from 'react-native-elements';
 
 export default function Login({ navigation }) {
-    const [username, setUsername] = useState('');
     const [phoneNum, setPhonenumber] = useState('');
+    const [stayLoggedIn, setStayLoggedIn] = useState(false);
 
     const handleLogin = async () => {
         try {
-            console.log('username:', username, 'phoneNum:', phoneNum);
             const response = await fetch(`${apiUrl}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ phoneNum, username }),
+                body: JSON.stringify({phoneNum}),
             });
 
             if (!response.ok) {
@@ -36,21 +36,62 @@ export default function Login({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Login</Text>
+            <Text style={styles.title}>Welcome User</Text>
+            <Text 
+                style={{
+                    paddingVertical: 20, 
+                    alignSelf : 'left', 
+                    left : 20, 
+                    fontSize: 18}}>
+                     Enter your login id 
+            </Text>
+            
             <TextInput
                 style={styles.input}
-                placeholder="Username"
-                value={username}
-                onChangeText={setUsername}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Login with your phone number"
+                placeholder="1234567890"
                 secureTextEntry
                 value={phoneNum}
                 onChangeText={setPhonenumber}
             />
-            <Button title="Login" onPress={() => navigation.navigate("Home")} />
+            <View style={styles.stayLoggedIn}>
+                <View><Text style={{ fontSize: 18 }}>Stay Logged In ? </Text></View>
+                <View style={styles.checkboxContainer}>
+                    <View style={styles.boxAndText}>
+                        <CheckBox
+                            style={styles.checkbox}
+                            checkedIcon='check'
+                            uncheckedIcon='square-o'
+                            uncheckedColor='#FB6813'
+                            checked={stayLoggedIn}
+                            checkedColor='#FB6813'
+                            onPress={() => setStayLoggedIn(true)}
+                        /> 
+                        <View>
+                            <Text style={styles.checkboxLabel}>Yes</Text>
+                        </View>
+                    </View>
+                    
+                    <View style={styles.boxAndText}>
+                    <CheckBox
+                            style={styles.checkbox}
+                            checkedIcon='check'
+                            uncheckedIcon='square-o'
+                            uncheckedColor='#FB6813'
+                            checked={!stayLoggedIn}
+                            checkedColor='#FB6813'
+                            onPress={() => setStayLoggedIn(false)}
+                        /> 
+                        <View>
+                        <Text style={styles.checkboxLabel}>No</Text>
+                        </View>
+                        
+                    </View>
+                </View>
+            </View>
+            <TouchableOpacity style={styles.loginButton} title="Login" onPress={() => {navigation.navigate("Home")}} >
+                <Text style={{fontSize : 18}}>Sign In </Text>
+            </TouchableOpacity>
+            
         </View>
     );
 };
@@ -58,22 +99,55 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        padding: 16,
+        paddingVertical: 20, 
+        paddingHorizontal: 20, 
     },
     title: {
         fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 16,
+        paddingVertical : 40, 
+        fontFamily: 'Nunito_400Regular',
+        color: '#FB6813',
+
     },
     input: {
-        width: '100%',
+        width: '90%',
         height: 40,
-        borderColor: 'gray',
+        borderColor: '#FB6813',
         borderWidth: 1,
         marginBottom: 16,
         paddingHorizontal: 8,
+        borderRadius: 15,
     },
+    loginButton: {
+        backgroundColor: '#FB6813',
+        borderRadius: 8,
+        width: '90%',
+        alignItems: 'center',
+        borderRadius: 15,
+        paddingVertical : 10, 
+    },
+    stayLoggedIn: {
+        flexDirection: 'row',
+        width: '95%',
+        marginBottom: 16,
+        fontSize: 14,
+    },
+    checkboxContainer: {
+        flexDirection: 'row', 
+        justifyContent : 'center',
+        alignItems : 'center',
+    },
+    boxAndText: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    checkbox: {
+        alignSelf: 'center',
+        backgroundColor: 'white',
+        border : 1, 
+        borderColor : '#FB6813'
+    },
+
 });
 

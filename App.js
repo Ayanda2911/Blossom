@@ -8,14 +8,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import ActiveRecording from './components/recording';
 import Signup from './components/register';
 import HomePage from './components/Homepage';
-import LandingPage from './components/LandingPage';
+import LandingPage from './components/landingPage';
 import Login from './components/Login';
 import AddEmergencyContacts from './components/addEmergencyContacts';
 import EmergencyContacts from './components/EmergencyContacts';
+import LogoTitle from './components/logoTitle';
 
 import { apiUrl } from './apiConfig';
 
 const Stack = createStackNavigator(); 
+
 
 /**
  * The main component of the application.
@@ -74,7 +76,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    checkLogin();
+    //checkLogin();
   }, []); 
 
   
@@ -91,8 +93,15 @@ export default function App() {
         <Stack.Screen name="Active Recording" component={ActiveRecording} />
         <Stack.Screen name="EmergencyContacts" component={EmergencyContacts} />
         <Stack.Screen name="AddEmergency" component={AddEmergencyContacts} />
-        {/* Add more screens as needed */}
-         <Stack.Screen name="Login" component={Login} />
+         <Stack.Screen name="Login" component={Login}
+          options={{
+            headerTitle: props => <LogoTitle {...props} />,
+            headerStyle : { 
+              backgroundColor : 'transparent',  
+            }, 
+            headerBackTitleVisible : false,
+            headerBackVisible : true, 
+          }} />
         <Stack.Screen name="Signup" component={Signup}  />
       </Stack.Navigator>
     </NavigationContainer>

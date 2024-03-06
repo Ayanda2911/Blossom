@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, Button, StyleSheet, ImageBackground } from "react-native";
 import * as Font from 'expo-font';
 
@@ -19,6 +19,7 @@ const fetchFonts2 = () => {
 
 //Landing page component
 export default function LandingPage({navigation}) {
+    
     return (
         <View style={styles.container}>
             <ImageBackground source={backgroundImage} resizeMode="cover" style={styles.image}>
@@ -42,8 +43,6 @@ export default function LandingPage({navigation}) {
                     />
                 </View>
 
-
-
             </ImageBackground>
         </View>
     );
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: "center", 
         color: "white",
-        fontFamily: "Nunito-Regular",
+        fontFamily: "Nunito-regular",
         marginTop: 103,
     },
     image: {
