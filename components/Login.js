@@ -43,13 +43,12 @@ export default function Login({ navigation }) {
                     alignSelf : 'left', 
                     left : 20, 
                     fontSize: 18}}>
-                     Enter your login id 
+                     Login Id 
             </Text>
             
             <TextInput
                 style={styles.input}
                 placeholder="1234567890"
-                secureTextEntry
                 value={phoneNum}
                 onChangeText={setPhonenumber}
             />
@@ -102,12 +101,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 20, 
         paddingHorizontal: 20,
-        fontFamily: 'Nunito-regular', 
+        fontFamily: 'Arial',
     },
     title: {
         fontSize: 24,
         paddingVertical : 40, 
-        fontFamily: 'Nunito-regular',
+        fontFamily: 'Arial',
         color: '#FB6813',
         fontWeight: 'bold'
     },
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         paddingHorizontal: 8,
         borderRadius: 15,
-        fontFamily: 'Nunito-regular',
+        fontFamily: 'Arial',
     },
     loginButton: {
         backgroundColor: '#FB6813',
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 15,
         paddingVertical : 10, 
-        fontFamily: 'Nunito-regular',
+        fontFamily: 'Arial',
         fontWeight: 'bold',
     },
     stayLoggedIn: {
@@ -136,7 +135,7 @@ const styles = StyleSheet.create({
         width: '95%',
         marginBottom: 16,
         fontSize: 14,
-        fontFamily: 'Nunito-regular',
+        fontFamily: 'Arial',
     },
     checkboxContainer: {
         flexDirection: 'row', 
@@ -146,7 +145,7 @@ const styles = StyleSheet.create({
     boxAndText: {
         flexDirection: 'row',
         alignItems: 'center',
-        fontFamily: 'Nunito-regular',
+        fontFamily: 'Arial',
     },
     checkbox: {
         alignSelf: 'center',

@@ -5,6 +5,7 @@ import { createStackNavigator , rootStack} from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 
+
 // List of the different screens
 import ActiveRecording from './components/recording';
 import Signup from './components/register';
@@ -24,8 +25,8 @@ const Stack = createStackNavigator();
 //Loads the custom font here so we can use it everywhere in the app
 const fetchFonts = () => {
   return Font.loadAsync({
-      'Nunito-regular': require('./assets/fonts/Nunito/Nunito-Regular.ttf'),
-      'Nunito-LightItalic': require('./assets/fonts/Nunito/Nunito-LightItalic.ttf'),
+      'Nunito-Regular': require('./assets/fonts/Nunito-Regular.ttf'),
+      'Nunito-LightItalic': require('./assets/fonts/Nunito-LightItalic.ttf'),
 
   });
 };

@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         paddingVertical : 40, 
-        fontFamily: 'Nunito-regular',
+        fontFamily: 'Arial',
         color: '#FB6813',
         fontWeight: 'bold',
         paddingBottom: 30,

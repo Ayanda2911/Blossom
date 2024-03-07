@@ -55,12 +55,16 @@ export default function Registration({ navigation }) {
         <View style={styles.container}>
         
             <Text style={styles.title}>Welcome to Blossom</Text>
-            <Text style={styles.subtitle}>Please enter your phone number below,this will
-            act as your login id. Thank you for joining us on this journey.</Text>
 
             <View style={styles.countContainer}>
                 <Text style={styles.count}> Set up 1 of 2</Text>
             </View>
+
+
+            <Text style={styles.subtitle}>Please enter your phone number below,this will
+            act as your Login Id. Thank you for joining us on this journey.</Text>
+
+   
 
             <Text style={styles.phoneNumber}>
                 Phone Number
@@ -75,13 +79,13 @@ export default function Registration({ navigation }) {
                 />
             </View>
 
-            <View style={styles.nextButtonContainer}>
+            
 
                 <TouchableOpacity style={styles.nextButton} onPress={() => {navigation.navigate("AddEmergency")}} >
-                    <Text style={{fontSize : 18}}>Next</Text>
+                    <Text style={{fontSize : 18, fontWeight: 'bold'}}>Next →</Text>
                 </TouchableOpacity>
 
-            </View>
+           
 
 
         </View>
@@ -115,7 +119,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         paddingVertical : 40,
-        fontFamily: 'Nunito-regular',
+        fontFamily: 'Arial',
         color: '#FB6813',
         fontWeight: 'bold'
     },
@@ -148,23 +152,15 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8,
         width: '90%',
         borderRadius: 15,
-        fontFamily: 'Nunito-regular',
-    },
-    nextButtonContainer: {
-        position: 'absolute',
-        bottom: 50,
-        width: '33%',
-        alignItems: 'center',
-        paddingVertical: 10,
-        borderColor: '#8e8e8e',
-        borderRadius: 8,
-        borderWidth: 1,
+        fontFamily: 'Arial',
     },
     nextButton: {
-        alignItems: 'center',
-        width: '40%',
-        fontFamily: 'Nunito-regular',
-        fontWeight: 'bold',
+        backgroundColor: 'transparent',
+        borderColor: '#FB6813',
+        borderWidth: 1,
+        borderRadius: 12,
+        paddingVertical : 10, 
+        paddingHorizontal: 20,
     },
 
 });//end of styles
