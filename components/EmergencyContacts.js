@@ -14,18 +14,23 @@ export default function EmergencyContacts({ navigation }) {
     
     const selectContacts = emergencyContacts.length;
 
-
-
     const handleDone = () => {
-        navigation.navigate('TutorialPage');
-        // Save emergency contacts to local backend 
-
+        // if the user has selected at least one contact, navigate to the next screen
+        if (selectContacts > 0) {   
+            navigation.navigate('SetEmergencyContacts');
+            // TODO Save emergency contacts to local backend
+        }
+        else{
+            navigation.navigate('AddEmergency');
+        }
     };
 
+    // if the contact is already selected, return true
     const isSelect = (contact) => {
         return emergencyContacts.some(c => c.id === contact.id);
     };
 
+    // this code handles the selection of contacts
     const handleSelect = (contact) => {
         if (selectContacts >= selectLimit && !isSelect(contact)) {
             return;
@@ -39,13 +44,20 @@ export default function EmergencyContacts({ navigation }) {
 
     let listToDisplay = contacts;
     useEffect(() => {
+        // this code is to manipulate the header of the screen
         navigation.setOptions({
             headerRight: () => (
+                // if done go to next if cancel go to previous
                 <TouchableOpacity style={styles.doneButton} onPress={handleDone}>
                     <Text style={styles.doneButtonText}>{selectContacts > 0 ? 'Done' : 'Cancel'}</Text>
                 </TouchableOpacity>
-            )
+            ),
+            title: '', 
+            // this views the back button on the header 
+
+            headerLeft: ''
         });
+        // this fetches the contacts from your phone
         const fetchContacts = async () => {
             try {
                 const { status } = await Contacts.requestPermissionsAsync();
@@ -64,6 +76,7 @@ export default function EmergencyContacts({ navigation }) {
         fetchContacts();
     }, [selectContacts]);
     
+    // this displays the contacts from getting them in your phone 
     const renderContacts = () => {
         return listToDisplay.map((contact, index) => (
             <TouchableOpacity 
@@ -78,20 +91,20 @@ export default function EmergencyContacts({ navigation }) {
         ));
     }
     
+    // this helps the search bar to filter the contacts
     if (search !== '') {
         listToDisplay = listToDisplay.filter((contact) => {
             return contact.name.toLowerCase().includes(search.toLowerCase());
         });
     }
+    // some fancy thing that searches contacts as you type
     const debouncedSearch = useMemo(() => {
         return debounce(setSearch, 30);
     }, []);
 
-
-
-
     return (
         <View style={styles.container}>
+            <Text style={styles.title}>Contacts</Text>
             <SearchBar 
                 placeholder="Search"
                 onChangeText={debouncedSearch}
@@ -108,8 +121,6 @@ export default function EmergencyContacts({ navigation }) {
         </View>
     );//end of return
 }//end of EmergencyContacts
-
-
 
 
 
@@ -152,4 +163,13 @@ const styles = StyleSheet.create({
         marginRight: 10,
         fontSize: 20, 
     },
+    title:{
+        fontSize: 24,
+        marginTop: 10,  
+        marginLeft: 20, 
+        marginBottom: 20,
+        fontFamily: 'Nunito-regular',
+        fontWeight: 'bold'
+    },
+    
 });

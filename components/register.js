@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start', //aligns its content at the top of the container
         alignItems: 'center', //horizontally center the content within the container
         flex: "1", 
-        backgroundColor: '#fff',
         fontFamily: 'Arial',
         paddingVertical: 20, 
         paddingHorizontal: 20,

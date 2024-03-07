@@ -66,7 +66,6 @@ export default function FakeHomePage() {
                           {DynamicImage({imageName : `image${index}`})}
                             <Text>{image.info}</Text>
                         </Card>
-                        
                     </TouchableOpacity>   
                 ))}
             </ScrollView>

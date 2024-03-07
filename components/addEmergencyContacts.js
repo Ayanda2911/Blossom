@@ -18,16 +18,10 @@ export default function AddEmergencyContacts({ navigation }) {
             </Text>
 
 
-
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('EmergencyContacts')}>
                 <Text style={styles.buttonText}>Open Phonebook</Text>
             </TouchableOpacity>
             
-
-        
-
-
-
 
 
         </View>//end of container

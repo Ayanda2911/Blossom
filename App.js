@@ -15,6 +15,7 @@ import AddEmergencyContacts from './components/addEmergencyContacts';
 import EmergencyContacts from './components/EmergencyContacts';
 import LogoTitle from './components/logoTitle';
 import FakeHomePage from './components/FakeHomePage';
+import SetEmergencyContacts from './components/SetEmergencyContacts';
 
 import { apiUrl } from './apiConfig';
 
@@ -110,8 +111,19 @@ export default function App() {
             headerBackVisible : true, 
           }}
         />
-        <Stack.Screen name="EmergencyContacts" component={EmergencyContacts} />
-        <Stack.Screen name="AddEmergency" component={AddEmergencyContacts} />
+        <Stack.Screen name="EmergencyContacts" component={EmergencyContacts} 
+         options={ {headerTitleShown: false}}/>
+        <Stack.Screen name="AddEmergency" component={AddEmergencyContacts}
+          options={{
+            headerTitle: props => <LogoTitle {...props} />,
+            headerStyle : { 
+              backgroundColor : 'transparent', 
+              height : 100,  
+            }, 
+            headerBackTitleVisible : false,
+            headerBackVisible : true, 
+          }}
+         />
          <Stack.Screen name="Login" component={Login}
           options={{
             headerTitle: props => <LogoTitle {...props} />,
@@ -121,8 +133,28 @@ export default function App() {
             headerBackTitleVisible : false,
             headerBackVisible : true, 
           }} />
-        <Stack.Screen name="Signup" component={Signup}  />
+        <Stack.Screen name="Signup" component={Signup} 
+          options={{
+            headerTitle: props => <LogoTitle {...props} />,
+            headerStyle : { 
+              backgroundColor : 'transparent', 
+              height : 100,  
+            }, 
+            headerBackTitleVisible : false,
+            headerBackVisible : true, 
+          }}
+         />
         <Stack.Screen name="FakeHomePage" component={FakeHomePage} />
+        <Stack.Screen name="SetEmergencyContacts" component={SetEmergencyContacts} 
+          options={{
+            headerTitle: props => <LogoTitle {...props} />,
+            headerStyle : { 
+              backgroundColor : 'transparent', 
+              height : 100,  
+            }, 
+            headerBackTitleVisible : false,
+            headerBackVisible : true, 
+          }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
